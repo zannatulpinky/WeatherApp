@@ -5,9 +5,10 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 
-class MainActivity : AppCompatActivity() {
+class DetailsActivity : AppCompatActivity() {
 
     lateinit var weatherViewModel: WeatherViewModel
 
@@ -22,8 +23,6 @@ class MainActivity : AppCompatActivity() {
         val tvHumidity = findViewById<TextView>(R.id.tvHumidity)
         val tvWindSpeed = findViewById<TextView>(R.id.tvWindSpeed)
         val tvGeoCoordinate = findViewById<TextView>(R.id.tvGeoCoordinate)
-        val etSearch = findViewById<EditText>(R.id.etSearch)
-        val btnSearch = findViewById<Button>(R.id.btnSearch)
 
 
         weatherViewModel.weatherResponse.observe(this) {
@@ -35,16 +34,13 @@ class MainActivity : AppCompatActivity() {
             tvGeoCoordinate.text = "GeoCoordinate: ${it.coord?.lat} ${it.coord?.lon}"
         }
 
-        btnSearch.setOnClickListener {
-            val cityName = etSearch.text.toString().trim()
-            if (cityName.isNotEmpty()) {
-                weatherViewModel.getWeatherData(cityName)
-            } else {
-                etSearch.error = "Please enter city name"
-            }
+        
+        val cityName = intent.getStringExtra("CITY_NAME")
+        if (!cityName.isNullOrEmpty()) {
+            weatherViewModel.getWeatherData(cityName)
+        } else {
+            Toast.makeText(this, "City name can't be null", Toast.LENGTH_SHORT).show()
         }
-
-        weatherViewModel.getWeatherData("Stockholm")
     }
 
 }

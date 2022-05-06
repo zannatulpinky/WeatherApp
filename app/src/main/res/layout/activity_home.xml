@@ -6,8 +6,22 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="10dp"
-    tools:context=".DetailsActivity">
+    tools:context=".HomeActivity">
 
+
+    <EditText
+        android:id="@+id/etSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter city name" />
+
+    <Button
+        android:id="@+id/btnSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginBottom="20dp"
+        android:text="Search" />
 
 
     <TextView
@@ -42,4 +56,5 @@
         android:id="@+id/tvGeoCoordinate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
 </LinearLayout>
